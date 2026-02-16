@@ -28,3 +28,23 @@ body {
   font-weight: bold;
   color: #555;
 }
+table {
+  width: 60%;
+  margin: 20px auto;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #333;
+  padding: 10px;
+  text-align: center;
+}
+
+th {
+  background-color: #222;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
