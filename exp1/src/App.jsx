@@ -5,6 +5,7 @@ import Users from "./components/Users";
 import UserDetails from "./components/UserDetails";
 import Profile from "./components/Profile";
 import Settings from "./components/Settings";
+import PostFetcher from "./components/PostFetcher";
 import "./components/components.css";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
             <Route path="profile" element={<Profile />} />
             <Route path="settings" element={<Settings />} />
           </Route>
+          <Route path="posts" element={<PostFetcher />} />
           {/* keep a register route that points to previous form */}
           <Route path="register" element={<Navigate to="/" replace />} />
         </Route>
