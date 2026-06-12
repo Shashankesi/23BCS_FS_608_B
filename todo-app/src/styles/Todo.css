@@ -1,0 +1,822 @@
+/* ============================================
+   MAIN TODO CONTAINER & GLASSMORPHISM
+   ============================================ */
+.todo-container {
+  width: 100%;
+  max-width: 800px;
+  border-radius: 25px;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 40px;
+  animation: slideInUp 0.6s ease-out;
+}
+
+.todo-container.dark {
+  background: rgba(30, 30, 46, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   HEADER STYLING
+   ============================================ */
+.todo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 35px;
+  padding-bottom: 25px;
+  border-bottom: 2px solid rgba(102, 126, 234, 0.2);
+  gap: 20px;
+}
+
+.todo-container.dark .todo-header {
+  border-bottom-color: rgba(102, 126, 234, 0.15);
+}
+
+.header-content {
+  flex: 1;
+}
+
+.app-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.title-icon {
+  font-size: 2.2rem;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.app-subtitle {
+  font-size: 1rem;
+  color: #999;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.todo-container.dark .app-subtitle {
+  color: #aaa;
+}
+
+/* Dark Mode Toggle */
+.dark-mode-toggle {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.dark-mode-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+.dark-mode-toggle:active {
+  transform: scale(0.95);
+}
+
+/* ============================================
+   PROGRESS BAR STYLING
+   ============================================ */
+.progress-section {
+  margin-bottom: 30px;
+  padding: 20px;
+  background: rgba(102, 126, 234, 0.1);
+  border-radius: 15px;
+  animation: slideInDown 0.5s ease-out 0.2s backwards;
+}
+
+.todo-container.dark .progress-section {
+  background: rgba(102, 126, 234, 0.08);
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.progress-label {
+  font-weight: 600;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.todo-container.dark .progress-label {
+  color: #ddd;
+}
+
+.progress-percentage {
+  font-weight: 700;
+  color: #667eea;
+  font-size: 1.1rem;
+}
+
+.progress-bar-container {
+  width: 100%;
+  height: 8px;
+  background: rgba(200, 200, 200, 0.3);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 10px;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.todo-container.dark .progress-bar-container {
+  background: rgba(100, 100, 100, 0.2);
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  border-radius: 10px;
+  transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+}
+
+.progress-light {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: shine 2s infinite;
+}
+
+@keyframes shine {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.progress-info {
+  font-size: 0.85rem;
+  color: #666;
+  text-align: center;
+}
+
+.todo-container.dark .progress-info {
+  color: #999;
+}
+
+/* ============================================
+   INPUT CONTAINER & ADD BUTTON
+   ============================================ */
+.input-container {
+  margin-bottom: 25px;
+  animation: slideInDown 0.5s ease-out 0.3s backwards;
+}
+
+.input-wrapper {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.todo-input {
+  flex: 1;
+  padding: 15px 20px;
+  border: 2px solid transparent;
+  border-radius: 15px;
+  font-size: 1rem;
+  background: rgba(102, 126, 234, 0.08);
+  color: #333;
+  outline: none;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.todo-input.dark {
+  background: rgba(102, 126, 234, 0.1);
+  color: #ddd;
+}
+
+.todo-input::placeholder {
+  color: rgba(100, 100, 100, 0.6);
+}
+
+.todo-input.dark::placeholder {
+  color: rgba(200, 200, 200, 0.5);
+}
+
+.todo-input:focus {
+  border-color: #667eea;
+  background: rgba(102, 126, 234, 0.15);
+  box-shadow: 0 0 15px rgba(102, 126, 234, 0.3);
+}
+
+.todo-input.dark:focus {
+  background: rgba(102, 126, 234, 0.2);
+  box-shadow: 0 0 15px rgba(102, 126, 234, 0.4);
+}
+
+.add-btn {
+  padding: 15px 25px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 15px;
+  color: white;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  font-family: inherit;
+}
+
+.add-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+.add-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.add-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.input-hint {
+  margin-top: 8px;
+  padding: 8px 12px;
+  background: rgba(102, 126, 234, 0.1);
+  border-left: 3px solid #667eea;
+  border-radius: 5px;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.todo-container.dark .input-hint {
+  background: rgba(102, 126, 234, 0.1);
+  color: #999;
+}
+
+.input-hint kbd {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+}
+
+/* ============================================
+   STATISTICS CONTAINER
+   ============================================ */
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-bottom: 25px;
+  animation: slideInDown 0.5s ease-out 0.4s backwards;
+}
+
+.stat-item {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.05) 100%);
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid rgba(102, 126, 234, 0.2);
+  transition: all 0.3s ease;
+}
+
+.todo-container.dark .stat-item {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.04) 100%);
+  border-color: rgba(102, 126, 234, 0.15);
+}
+
+.stat-item:hover {
+  transform: translateY(-3px);
+  border-color: #667eea;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.1) 100%);
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.85rem;
+  color: #999;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 5px;
+}
+
+.stat-value {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@media (max-width: 600px) {
+  .stats-container {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+/* ============================================
+   FILTER BUTTONS
+   ============================================ */
+.filter-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+  justify-content: center;
+  animation: slideInDown 0.5s ease-out 0.5s backwards;
+}
+
+.filter-btn {
+  padding: 10px 20px;
+  border: 2px solid rgba(102, 126, 234, 0.3);
+  background: transparent;
+  color: #666;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.todo-container.dark .filter-btn {
+  color: #aaa;
+  border-color: rgba(102, 126, 234, 0.2);
+}
+
+.filter-btn:hover {
+  border-color: #667eea;
+  color: #667eea;
+}
+
+.filter-btn.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+/* ============================================
+   TODO LIST & ITEMS
+   ============================================ */
+.todo-list {
+  margin-bottom: 25px;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(102, 126, 234, 0.1);
+  border-radius: 15px;
+  margin-bottom: 12px;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: todoFadeIn 0.4s ease-out;
+}
+
+.todo-container.dark .todo-item {
+  background: rgba(50, 50, 70, 0.6);
+  border-color: rgba(102, 126, 234, 0.1);
+}
+
+@keyframes todoFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+    filter: blur(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+  }
+}
+
+.todo-item:hover {
+  background: rgba(102, 126, 234, 0.08);
+  border-color: #667eea;
+  box-shadow: 0 5px 20px rgba(102, 126, 234, 0.2);
+  transform: translateY(-3px);
+}
+
+.todo-container.dark .todo-item:hover {
+  background: rgba(102, 126, 234, 0.12);
+}
+
+.todo-item.completed {
+  opacity: 0.65;
+}
+
+.todo-item:not(.editing):active {
+  animation: pulse 0.4s ease-out;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.2);
+  }
+  50% {
+    box-shadow: 0 5px 30px rgba(102, 126, 234, 0.4);
+  }
+  100% {
+    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.2);
+  }
+}
+
+/* ============================================
+   CHECKBOX STYLING
+   ============================================ */
+.checkbox-wrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.todo-checkbox {
+  display: none;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 2px solid #667eea;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: rgba(102, 126, 234, 0.1);
+}
+
+.todo-checkbox:checked + .checkbox-label {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-color: transparent;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.checkmark {
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.todo-checkbox:checked ~ label .checkmark {
+  opacity: 1;
+  animation: checkBounce 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes checkBounce {
+  0% {
+    transform: scale(0) rotate(-45deg);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1) rotate(0);
+  }
+}
+
+.todo-item.completed .checkbox-label {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-color: transparent;
+}
+
+/* ============================================
+   TODO TEXT & CONTENT
+   ============================================ */
+.todo-text {
+  flex: 1;
+  color: #333;
+  font-size: 1.05rem;
+  margin: 0;
+  word-break: break-word;
+  transition: all 0.3s ease;
+}
+
+.todo-container.dark .todo-text {
+  color: #ddd;
+}
+
+.todo-item.completed .todo-text {
+  color: #999;
+  text-decoration: line-through;
+  text-decoration-color: #667eea;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+.todo-container.dark .todo-item.completed .todo-text {
+  color: #777;
+}
+
+/* ============================================
+   EDIT MODE
+   ============================================ */
+.edit-container {
+  flex: 1;
+}
+
+.edit-input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #667eea;
+  border-radius: 10px;
+  font-size: 1.05rem;
+  background: rgba(102, 126, 234, 0.1);
+  color: #333;
+  outline: none;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+}
+
+.todo-container.dark .edit-input {
+  background: rgba(102, 126, 234, 0.15);
+  color: #ddd;
+}
+
+.edit-input:focus {
+  border-color: #764ba2;
+  box-shadow: 0 0 15px rgba(102, 126, 234, 0.5);
+}
+
+/* ============================================
+   ACTION BUTTONS
+   ============================================ */
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  flex-shrink: 0;
+}
+
+.todo-item:hover .action-buttons,
+.todo-item.hovered .action-buttons {
+  opacity: 1;
+}
+
+.action-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  color: #666;
+}
+
+.todo-container.dark .action-btn {
+  color: #999;
+}
+
+.action-btn:hover {
+  transform: scale(1.15);
+}
+
+.action-btn:active {
+  transform: scale(0.95);
+}
+
+.edit-btn:hover {
+  background: rgba(102, 126, 234, 0.2);
+  color: #667eea;
+}
+
+.delete-btn:hover {
+  background: rgba(220, 53, 69, 0.2);
+  color: #dc3545;
+}
+
+.save-btn:hover {
+  background: rgba(40, 167, 69, 0.2);
+  color: #28a745;
+}
+
+.cancel-btn:hover {
+  background: rgba(255, 193, 7, 0.2);
+  color: #ffc107;
+}
+
+/* ============================================
+   EMPTY STATE
+   ============================================ */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.empty-icon {
+  font-size: 4rem;
+  margin-bottom: 15px;
+  animation: float 3s ease-in-out infinite;
+}
+
+.empty-message {
+  font-size: 1.1rem;
+  color: #999;
+  margin: 0;
+  font-weight: 500;
+}
+
+.todo-container.dark .empty-message {
+  color: #777;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.todo-footer {
+  text-align: center;
+  padding-top: 20px;
+  border-top: 2px solid rgba(102, 126, 234, 0.2);
+  color: #999;
+  font-size: 0.9rem;
+}
+
+.todo-container.dark .todo-footer {
+  border-top-color: rgba(102, 126, 234, 0.15);
+  color: #777;
+}
+
+.heart {
+  display: inline-block;
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.3);
+  }
+  50% {
+    transform: scale(1);
+  }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+@media (max-width: 768px) {
+  .todo-container {
+    padding: 25px;
+    border-radius: 20px;
+  }
+
+  .app-title {
+    font-size: 2rem;
+  }
+
+  .todo-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 15px;
+  }
+
+  .header-content {
+    width: 100%;
+  }
+
+  .input-wrapper {
+    flex-direction: column;
+  }
+
+  .todo-input,
+  .add-btn {
+    width: 100%;
+  }
+
+  .add-btn span {
+    display: none;
+  }
+
+  .action-buttons {
+    opacity: 1;
+  }
+
+  .todo-item {
+    padding: 15px;
+    flex-wrap: wrap;
+  }
+
+  .todo-text {
+    flex-basis: 100%;
+  }
+
+  .filter-container {
+    flex-wrap: wrap;
+  }
+
+  .stats-container {
+    grid-template-columns: 1fr;
+  }
+
+  .dark-mode-toggle {
+    width: 45px;
+    height: 45px;
+  }
+}
+
+@media (max-width: 480px) {
+  .todo-container {
+    padding: 20px;
+    border-radius: 18px;
+  }
+
+  .app-title {
+    font-size: 1.5rem;
+  }
+
+  .app-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .todo-text {
+    font-size: 0.95rem;
+  }
+
+  .checkbox-label {
+    width: 24px;
+    height: 24px;
+  }
+
+  .action-btn {
+    padding: 4px;
+  }
+}
