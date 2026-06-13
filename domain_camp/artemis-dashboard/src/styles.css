@@ -1,0 +1,114 @@
+:root{
+  --bg:#0b1220;
+  --panel:#0f1724;
+  --accent:#00c2ff;
+  --warn:#ff4d4f;
+  --text:#e6eef8;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,#071124 0%,#0b1220 100%);color:var(--text);min-height:100vh}
+.app-root::before{content:'';position:fixed;inset:0;z-index:-2;background:radial-gradient(ellipse at 10% 10%, rgba(0,80,120,0.06), transparent 10%), radial-gradient(ellipse at 90% 80%, rgba(120,40,200,0.04), transparent 20%)}
+.stars{position:fixed;inset:0;z-index:-3;pointer-events:none}
+.stars::after{content:'';position:absolute;inset:0;background-image:radial-gradient(#ffffff11 1px, transparent 1px);background-size:3px 3px;opacity:0.8;animation:twinkle 8s linear infinite}
+@keyframes twinkle{0%{transform:translateY(0)}50%{transform:translateY(-8px)}100%{transform:translateY(0)}}
+.nebula{position:fixed;inset:0;z-index:-4;opacity:0.18;background:radial-gradient(circle at 20% 30%, rgba(15,120,200,0.12), transparent 8%), radial-gradient(circle at 80% 70%, rgba(120,40,200,0.10), transparent 12%)}
+.app-root{min-height:100vh}
+.app-header{font-size:1.6rem;padding:12px 0;text-align:center;font-family:'Orbitron', sans-serif;letter-spacing:0.6px}
+.command-center{display:grid;grid-template-columns:280px 1fr 360px;gap:18px;min-height:calc(100vh - 120px);padding:18px}
+.left-panel,.right-panel{display:flex;flex-direction:column;gap:14px}
+.center-panel{display:flex;flex-direction:column;gap:14px}
+.dashboard-grid.emergency { --accent: var(--warn); }
+.panel{backdrop-filter: blur(8px);background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.04);border-radius:12px;padding:12px;box-shadow:0 8px 30px rgba(2,6,23,0.7)}
+.panel-title{margin:0 0 8px 0;color:var(--accent);font-size:1.05rem}
+.panel-body{font-size:0.98rem}
+
+/* simple CSS entrance animation for panels (fallback to avoid framer-motion) */
+.panel-animate{opacity:0;transform:translateY(6px);animation:panelIn 520ms forwards ease-out}
+@keyframes panelIn{to{opacity:1;transform:none}}
+.status p{margin:6px 0}
+.liftoff{color:#9cff7a;font-weight:700}
+.aborted{color:var(--warn);font-weight:700}
+.telemetry .warning{color:var(--warn);font-weight:700}
+.btn{background:transparent;border:1px solid rgba(255,255,255,0.08);color:var(--text);padding:8px 12px;border-radius:6px;cursor:pointer}
+.btn:hover{border-color:rgba(255,255,255,0.14)}
+.abort-global{background:var(--warn);border:none;color:#fff;padding:10px 14px;margin-right:12px}
+.abort-manual{background:#5a0d0d;border:none;color:#fff;padding:8px 12px;margin-top:8px}
+.control-panel{display:flex;align-items:center;justify-content:space-between}
+.metrics p{margin:4px 0}
+.app-footer{margin-top:20px;text-align:center;opacity:0.7;font-size:0.9rem}
+@media(min-width:1200px){.command-center{grid-template-columns:300px 1fr 380px}}
+@media(max-width:1199px){.command-center{grid-template-columns:1fr;grid-template-rows:auto;min-height:100vh;padding:12px}}
+
+/* timeline */
+.timeline{display:flex;flex-direction:column;gap:10px}
+.timeline-step{display:flex;gap:8px;align-items:center}
+.timeline-step .dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.04);color:var(--text)}
+.timeline-step.done .dot{background:linear-gradient(90deg,var(--accent),#7effa1);color:#001217}
+.timeline-step .label{opacity:0.9}
+
+/* mission logs */
+.mission-logs{max-height:160px;overflow:auto;padding-right:6px}
+.log-line{font-size:0.9rem;opacity:0.9;padding:6px 0;border-bottom:1px dashed rgba(255,255,255,0.02)}
+
+/* telemetry panel specifics */
+.telemetry-wrap{display:flex;flex-direction:column;gap:12px}
+.telemetry-top{display:flex;gap:12px;align-items:center}
+.comm-status{font-size:0.9rem}
+
+/* engine status */
+.engine-status{display:flex;flex-direction:column;gap:10px}
+.engine{display:flex;gap:10px;align-items:center}
+.engine-indicator{width:14px;height:14px;border-radius:3px;background:#222}
+.engine-indicator.on{background:linear-gradient(90deg,#7effa1,#00c2ff)}
+.engine-meta{flex:1}
+.engine-temp{font-size:0.85rem;color:#cfe7ff}
+.engine-health{background:rgba(255,255,255,0.03);height:6px;border-radius:6px;overflow:hidden}
+.engine-health .health-bar{height:100%;background:linear-gradient(90deg,#7effa1,#00c2ff)}
+
+/* radar HUD */
+.radar-hud{width:120px;height:120px;border-radius:999px;border:1px solid rgba(0,200,255,0.12);display:flex;align-items:center;justify-content:center;position:relative}
+.radar-ring{position:absolute;inset:8px;border-radius:999px;border:1px solid rgba(0,200,255,0.06);animation:rotate 8s linear infinite}
+.radar-center{width:8px;height:8px;border-radius:50%;background:linear-gradient(90deg,#00c2ff,#7effa1)}
+@keyframes rotate{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+
+/* center stage overlays */
+.center-stage{position:relative;display:flex;align-items:center;justify-content:center;height:60vh}
+.center-overlays{position:absolute;top:12px;left:12px;right:12px;display:flex;justify-content:space-between}
+.altitude-velocity{background:linear-gradient(90deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:8px;border-radius:8px}
+
+/* analytics placeholder */
+.analytics{min-height:140px}
+
+
+/* Rocket panel styles */
+.rocket-panel{position:relative;height:360px;display:flex;align-items:flex-end;justify-content:center;overflow:hidden}
+.rocket-canvas{position:absolute;inset:0;width:100%;height:100%}
+.rocket-svg{position:relative;width:240px;height:440px;pointer-events:none;transition:transform 2s ease}
+.rocket-svg.launched{transform:translateY(-60vh) scale(0.65)}
+.rocket-svg.aborted{filter:grayscale(60%) hue-rotate(-20deg)}
+
+/* screen shake */
+.screen-shake{animation:screenShake 250ms linear infinite}
+@keyframes screenShake{0%{transform:translateY(0)}25%{transform:translateY(-6px)}50%{transform:translateY(0)}75%{transform:translateY(4px)}100%{transform:translateY(0)}}
+
+/* clock and widgets */
+.clock{font-size:0.9rem;opacity:0.85;margin-top:6px}
+.status-widgets{display:flex;gap:12px;align-items:center;margin-top:10px}
+.altitude{color:#bfe7d6}
+
+.telemetry-grid{display:flex;gap:12px;align-items:center}
+.gauges{display:flex;align-items:center}
+
+/* Circular gauge and countdown ring sizes */
+.circular-gauge{width:120px;height:120px}
+.countdown-ring{width:80px;height:80px}
+
+/* emergency mode visuals */
+.dashboard-grid.emergency .panel{border-color:rgba(255,77,79,0.22);box-shadow:0 8px 40px rgba(255,60,60,0.08)}
+.dashboard-grid.emergency .panel-title{color:var(--warn)}
+.dashboard-grid.emergency .aborted{animation:flashAlert 900ms linear infinite}
+@keyframes flashAlert{0%{opacity:1}50%{opacity:0.2}100%{opacity:1}}
+
+/* responsive */
+@media(max-width:760px){.rocket-svg{width:160px;height:300px}.rocket-panel{height:280px}}
+
